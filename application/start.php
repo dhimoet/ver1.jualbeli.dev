@@ -174,11 +174,10 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 
 /*
 |--------------------------------------------------------------------------
-| Include helper files
+| Include additional files
 |--------------------------------------------------------------------------
-|
-| Custom functions
 |
 */
 
+include('config/jualbeli.php');
 include('helpers/custom_functions.php');

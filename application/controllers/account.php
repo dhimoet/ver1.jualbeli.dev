@@ -93,8 +93,8 @@ class Account_Controller extends Base_Controller {
 		}
 	}
 	
-	public function facebook_connect()
+	public function action_facebook_connect()
 	{
-		
+		return Redirect::to(Facebook::get_login_url());
 	}
 }

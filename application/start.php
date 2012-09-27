@@ -171,3 +171,14 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 {
 	Session::load();
 }
+
+/*
+|--------------------------------------------------------------------------
+| Include helper files
+|--------------------------------------------------------------------------
+|
+| Custom functions
+|
+*/
+
+include('helpers/custom_functions.php');

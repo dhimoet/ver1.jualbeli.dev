@@ -89,12 +89,12 @@ Event::listen('500', function()
 
 Route::filter('before', function()
 {
-	//return View::make('templates.base_header');
+	
 });
 
 Route::filter('after', function($response)
 {
-	//return View::make('templates.base_footer');
+	
 });
 
 Route::filter('csrf', function()

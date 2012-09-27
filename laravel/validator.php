@@ -270,7 +270,7 @@ class Validator {
 	{
 		$other = $parameters[0];
 
-		if ($this->validate_required($other, $this->attributes[$other]))
+		if (array_key_exists($other, $this->attributes) && $this->validate_required($other, $this->attributes[$other]))
 		{
 			return $this->validate_required($attribute, $value);
 		}

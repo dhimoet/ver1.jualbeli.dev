@@ -1,25 +1,25 @@
 <form method="post" action="/auth/register" name="registration_form">
 	<div>
-		<label>display name: </label>
-		<input type="text" name="user[name]" />
-	</div>
-	<div>
 		<label>username: </label>
-		<input type="text" name="user[username]" />
-	</div>
-	<div>
-		<label>password: </label>
-		<input type="text" name="user[password]" />
-	</div>
-	<div>
-		<label>confirm password: </label>
-		<input type="text" name="user[confirm_password]" />
+		<input type="text" name="username" value="<?=Input::get('username')?>" />
+		<span><?=(!empty($username))?$username[0]:''?></span>
 	</div>
 	<div>
 		<label>email: </label>
-		<input type="text" name="user[email]" />
+		<input type="text" name="email" value="<?=Input::get('email')?>" />
+		<span><?=(!empty($email))?$email[0]:''?></span>
 	</div>
 	<div>
-		<input type="submit"  />
+		<label>password: </label>
+		<input type="password" name="password" value="<?=Input::get('password')?>" />
+		<span><?=(!empty($password))?$password[0]:''?></span>
+	</div>
+	<div>
+		<label>confirm password: </label>
+		<input type="password" name="password_confirmation" value="<?=Input::get('password_confirmation')?>" />
+		<span><?=(!empty($password_confirmation))?$password_confirmation[0]:''?></span>
+	</div>
+	<div>
+		<input type="submit" value="Submit" />
 	</div>
 </form>

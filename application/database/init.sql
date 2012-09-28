@@ -55,3 +55,25 @@ CREATE TABLE `sessions` (
     `data` TEXT NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_twitter_token` ( 
+  `id` int unsigned NOT NULL auto_increment,
+  `user_id` int unsigned NOT NULL,
+  `oauth_token` varchar(255) not null,
+  `oauth_token_secret` varchar(255) not null,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  primary key (`id`),
+  unique u_uid (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_facebook_token` ( 
+  `id` int unsigned NOT NULL auto_increment,
+  `user_id` int unsigned NOT NULL,
+  `access_token` varchar(255) not null,
+  `expires` datetime not null,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  primary key (`id`),
+  unique u_uid (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

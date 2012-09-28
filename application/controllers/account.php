@@ -11,6 +11,12 @@ class Account_Controller extends Base_Controller {
 	{
 		$user = User::find(Auth::user()->id);
 		$meta = UserMeta::where('user_id', '=', Auth::user()->id)->first();
+		
+		// Facebook library must be initialize first every time
+		Facebook::initialize();
+		//echo Facebook::getAccessToken();
+		Facebook::api('/100004311189329');
+		
 		$data = array(
 			'user' => $user,
 			'meta' => $meta,
@@ -95,6 +101,25 @@ class Account_Controller extends Base_Controller {
 	
 	public function action_facebook_connect()
 	{
-		return Redirect::to(Facebook::get_login_url());
+		// Facebook library must be initialize first every time
+		Facebook::initialize();
+		if(!Facebook::get_user_id()) {
+			return Redirect::to(Facebook::get_login_url());
+		}
+		else {
+			// Store Facebook uid if not stored in database
+			$user = User::find(Auth::user()->id);
+			if(empty($user->facebook_uid)) {
+				$user->facebook_uid = Facebook::get_user_id();
+				$user->save();
+			}
+			else {
+				// Match the user id from Facebook and from database
+				if($user->facebook_uid != Facebook::get_user_id()) {
+					// What to do here?
+				}
+			}
+			return Redirect::to('/account');
+		}
 	}
 }

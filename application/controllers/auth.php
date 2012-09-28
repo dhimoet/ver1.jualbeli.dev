@@ -71,9 +71,11 @@ class Auth_Controller extends Base_Controller {
 				'password' => Input::get('password')
 			);
 			// log user in
-			if (Auth::attempt($credentials))
-			{
+			if (Auth::attempt($credentials)) {
 				 return Redirect::home();
+			}
+			else {
+				return Redirect::to('/auth/login');
 			}
 		}
 	}

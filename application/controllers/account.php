@@ -11,15 +11,14 @@ class Account_Controller extends Base_Controller {
 	{
 		$user = User::find(Auth::user()->id);
 		$meta = UserMeta::where('user_id', '=', Auth::user()->id)->first();
-		
 		// Facebook library must be initialize first every time
 		Facebook::initialize();
-		//echo Facebook::getAccessToken();
-		Facebook::api('/100004311189329');
+		$fb = Facebook::api('/100004311189329');
 		
 		$data = array(
-			'user' => $user,
-			'meta' => $meta,
+			'user' 	=> $user,
+			'meta' 	=> $meta,
+			'fb'	=> $fb,
 		);
 		// display profile
 		$view = View::make('templates.base_header');

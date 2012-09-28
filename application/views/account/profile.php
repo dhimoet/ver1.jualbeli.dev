@@ -19,3 +19,6 @@
 <div>
 	<?print_rf($meta);?>
 </div>
+<div>
+	<?print_rf($fb);?>
+</div>

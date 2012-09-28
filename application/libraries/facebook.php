@@ -60,6 +60,7 @@ class Facebook {
 	public static function api($args)
 	{
 		$response = static::$facebook->api($args);
-		print_rf($response); die;
+		//print_rf($response); die;
+		return $response;
 	}
 }

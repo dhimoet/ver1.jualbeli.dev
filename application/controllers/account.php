@@ -2,6 +2,12 @@
 
 class Account_Controller extends Base_Controller {
 
+	public function __construct() {
+		parent::__construct();
+		// check login status
+		$this->filter('before', 'auth');
+	}
+	
 	public function action_index()
 	{
 		return $this->action_profile();
@@ -102,21 +108,30 @@ class Account_Controller extends Base_Controller {
 	{
 		// Facebook library must be initialize first every time
 		Facebook::initialize();
+		// login user to Facebook if not logged in
 		if(!Facebook::get_user_id()) {
 			return Redirect::to(Facebook::get_login_url());
 		}
 		else {
-			// Store Facebook uid if not stored in database
 			$user = User::find(Auth::user()->id);
+			// store Facebook uid if not stored in database
 			if(empty($user->facebook_uid)) {
 				$user->facebook_uid = Facebook::get_user_id();
 				$user->save();
 			}
 			else {
-				// Match the user id from Facebook and from database
+				// match the user id from Facebook and from database
 				if($user->facebook_uid != Facebook::get_user_id()) {
-					// What to do here?
+					// what to do here?
 				}
+			}
+			$uft = UserFacebookToekn::where('user_id', '=', Auth::user()->id);
+			// store Facebook token if not stored in database or if existing token is expired
+			if( empty($uft) || strtotime($uft->expires_at) < time() ) {
+				$uft->user_id = Auth::user()->id;
+				$uft->access_token = Facebook::getAccessToken();
+				$uft->expires_at = (time() + 60*60*24*30*2);
+				$uft->save();
 			}
 			return Redirect::to('/account');
 		}
